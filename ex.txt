@@ -1,0 +1,2 @@
+In allegato trovate il file sql da importare nel phpMyAdmin, lo schema ER del database e il file con le query da implementare.
+Dopo aver creato un nuovo database nel vostro phpMyAdmin e aver importato lo schema allegato, eseguite le query del file allegato.
