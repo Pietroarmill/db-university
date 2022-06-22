@@ -1,19 +1,15 @@
 <?php
-define("DB_SERVERNAME", "localhost");
-define("DB_USERNAME",  "root");
-define("DB_PASSWORD",  "root");
-define("DB_NAME",   "university");
-define("DB_PORT", 3306);
+require_once __DIR__ . "/database.php";
 
-$conn = new mysqli(DB_SERVERNAME, DB_USERNAME, DB_PASSWORD, DB_NAME, DB_PORT);
+$stmt = $conn->prepare("SELECT * FROM `departments` WHERE `id`=?");
+$stmt->bind_param("d", $id);
+$id = $_GET("id");
 
-if ($conn && $conn->connect_error) {
-  echo "error";
-  die();
-}
+$stmt->execute();
+$result = $stmt->get_result();
 
-$sql = "SELECT * FROM `departments`;";
-$result = $conn->query($sql);
+var_dump($result);
+
 
 $departments = [];
 
@@ -43,7 +39,7 @@ if ($result && $result->num_rows > 0) {
   <?php foreach($departments as $department) { ?>
   <div>
     <h2><?php echo $department["name"] ?></h2>
-    <a href="">Vedi informazioni</a>
+    <a href="single-departments.php?id=<?php echo $department["id"] ?>">Vedi informazioni</a>
   </div>
   <?php } ?>
 
